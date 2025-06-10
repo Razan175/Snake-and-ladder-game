@@ -5,6 +5,7 @@
 #include "Ladder.h"
 #include "Card.h"
 #include "Player.h"
+#include "Snake.h"
 
 Cell::Cell(const CellPosition & pos) : position(pos)
 {
@@ -51,7 +52,7 @@ Snake * Cell::HasSnake() const
 
 	///TODO: Implement the following function like HasLadder() function
 
-	return false; // THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
+	return dynamic_cast<Snake *>(pGameObject); // THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
 }
 
 Card * Cell::HasCard() const
@@ -59,7 +60,7 @@ Card * Cell::HasCard() const
 
 	///TODO: Implement the following function like HasLadder() function
 
-	return false; // THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
+	return dynamic_cast<Card*>(pGameObject); // THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
 
 }
 

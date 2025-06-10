@@ -17,14 +17,15 @@ private:
 	
 	// ========== Some Utility Functions (Private Functions) ==========
 
+	//DONE
 	///TODO: IMPLEMENT THE FOLLOWING FUNCTION
 	int GetCellStartX(const CellPosition & cellpos) const;	// Gets the X coordinate 
 															// of the upper left corner of the passed cellpos
-
+	//DONE
 	///TODO: IMPLEMENT THE FOLLOWING FUNCTION
 	int GetCellStartY(const CellPosition & cellpos) const;	// Gets the Y coordinate 
 															// of the upper left corner of the passed cellpos
-
+	//DONE
 	///TODO: COMPLETE THE IMPLEMENTATIN OF THE FOLLOWING FUNCTION
 	void DrawCardNumber(const CellPosition & cellpos, int cardNum) const;	// Draws the passed card "number"
 																			// in the passed cellpos
@@ -52,17 +53,20 @@ public:
 	
 	void PrintMessage(string msg) const;	// Prints a message on Status bar
 
+	//DONE
 	///TODO: COMPLETE THE IMPLEMENTATIN OF THE FOLLOWING FUNCTION
 	void PrintPlayersInfo(string info);		// Prints players' info on the right-side of the toolbar
 
 	// ========== Game Drawing Functions ==========
 
+	//DONE
 	///TODO: COMPLETE THE IMPLEMENTATIN OF THE FOLLOWING FUNCTION	
 	void DrawCell(const CellPosition & cellpos, int cardNum=-1) const;	
 													// Draws "Cell Rectangle" with "Cell Number"
 													// and "Card Number" (if any), cardNum=-1 means no Card
 													// the cell rectangle's color depends on heving a card or not
 
+	//DONE
 	///TODO: COMPLETE THE IMPLEMENTATIN OF THE FOLLOWING FUNCTION	
 	void DrawPlayer(const CellPosition & cellpos, int playerNum, color playerColor) const;  
 	                                                // Draws "Player Circle" filled with the passed color
@@ -70,7 +74,7 @@ public:
 													// ** Players' Circles Locations depending on "playerNum" is as follows: **
 													//    Player_0   Player_1
 													//    Player_2   Player_3
-	
+	//DONE
 	///TODO: COMPLETE THE IMPLEMENTATIN OF THE FOLLOWING FUNCTION	
 	void DrawLadder(const CellPosition & fromCellPos, const CellPosition & toCellPos) const;
 													// Draws Ladder from start cell to end cell (start < end)
@@ -79,6 +83,7 @@ public:
 													// 2- horizontal lines as many as the cell borders between the start and end
 												    // Don't forget any needed validations on fromCellPos and toCellPos
 	
+	//DONE
 	///TODO: COMPLETE THE IMPLEMENTATIN OF THE FOLLOWING FUNCTION	
 	void DrawSnake(const CellPosition & fromCellPos, const CellPosition & toCellPos) const;
 													// Draws Snake from start cell to end cell (start > end)

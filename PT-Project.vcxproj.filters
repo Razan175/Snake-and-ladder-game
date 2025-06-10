@@ -184,6 +184,8 @@
     <ClCompile Include="Output.cpp">
       <Filter>GUIClasses</Filter>
     </ClCompile>
+    <ClCompile Include="AddSnakeAction.cpp" />
+    <ClCompile Include="Snake.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -295,5 +297,7 @@
       <Filter>GUIClasses</Filter>
     </ClInclude>
     <ClInclude Include="DEFS.h" />
+    <ClInclude Include="AddSnakeAction.h" />
+    <ClInclude Include="Snake.h" />
   </ItemGroup>
 </Project>
