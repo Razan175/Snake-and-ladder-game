@@ -31,6 +31,10 @@ public:
 
 	int GetTurnCount() const;		// A getter for the turnCount
 
+	int GetPlayerNum();
+
+	void ResetPlayer();
+
 	///TODO: You can add setters and getters for data members here (if needed)
 
 	// ====== Drawing Functions ======
@@ -47,6 +51,9 @@ public:
 	
 	void AppendPlayerInfo(string & playersInfo) const; // Appends player's info to the input string, 
 	                                                   // for example: P0(wallet, turnCount)
+
+	void IncrementWallet(int amount);
+	void DecrementWallet(int amount);
 
 };
 

@@ -54,11 +54,10 @@ void AddCardAction::Execute()
 	switch (cardNumber)
 	{
 	case 1:
-		pCard = new CardOne(cardPosition);
+	case 2:
+		pCard = new CardOne(cardPosition,cardNumber);
 		break;
-
 		// A- Add the remaining cases
-
 	}
 
 	// 3- if pCard is correctly set in the switch case (i.e. if pCard is pointing to an object -- NOT NULL)
@@ -75,6 +74,7 @@ void AddCardAction::Execute()
 		{
 			// Print an appropriate message
 			pGrid->PrintErrorMessage("Error: Cell already has an object ! Click to continue ...");
+			delete pCard;
 		}
 	}
 

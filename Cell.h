@@ -8,7 +8,6 @@ class Grid;
 class Output;
 class GameObject;
 class Ladder;
-class Snake;
 class Card;
 class Player;
 
@@ -18,7 +17,6 @@ class Cell
 
 	GameObject * pGameObject;       // a pointer to the GameObject existing in the Cell (if any)
 	                                // if no GameObject in this Cell, pGameObject should be NULL
-
 public:
 
 	Cell(const CellPosition & pos); // A constructor initializes the cell position with the passed CellPosition
@@ -30,10 +28,11 @@ public:
 	
 	bool SetGameObject(GameObject * pGObj);	// A setter for pGameObject of the cell
 	                                        // It does NOT add the object and returns false if the cell already contains one
+	void RemoveGameObject();
 	GameObject * GetGameObject() const;     // A getter for pGameObject of the cell
 		
 	Ladder * HasLadder() const;	// Checks if pGameObject is a Ladder Then returns it if a ladder or returns NULL if not ladder
-	Snake * HasSnake() const;	// Checks if pGameObject is a Snake Then returns it if a snake or returns NULL if not snake
+	Ladder * HasSnake() const;	// Checks if pGameObject is a Snake Then returns it if a snake or returns NULL if not snake
 	Card * HasCard() const;	    // Checks if pGameObject is a Card Then returns it if a card or returns NULL if not card
 	
 	// ======= Drawing Functions ======= 
@@ -43,5 +42,6 @@ public:
 	                                            // The two Draw functions are separated because we should draw all cells first
 	                                            // then draw all ladders/snake, in order to avoid overlapping 
 	                                            // or drawing cell's background over existing ladders/snakes
+	~Cell();
 };
 

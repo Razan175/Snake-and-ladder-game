@@ -1,8 +1,8 @@
 #include "CardOne.h"
 
-CardOne::CardOne(const CellPosition & pos) : Card(pos) // set the cell position of the card
+CardOne::CardOne(const CellPosition& pos, int cardNum) : Card(pos)
 {
-	cardNumber = 1; // set the inherited cardNumber data member with the card number (1 here)
+	cardNumber = cardNum;
 }
 
 CardOne::~CardOne(void)
@@ -24,7 +24,10 @@ void CardOne::ReadCardParameters(Grid * pGrid)
 	Input* pIn = pGrid->GetInput();
 	// 2- Read an Integer from the user using the Input class and set the walletAmount parameter with it
 	//    Don't forget to first print to a descriptive message to the user like:"New CardOne: Enter its wallet amount ..."
-	pOut->PrintMessage("New CardOne: Enter its wallet amount ...");
+	if (cardNumber == 1)
+		pOut->PrintMessage("New CardOne: Enter its wallet amount ...");
+	else
+		pOut->PrintMessage("New CardTwo: Enter its wallet amount ...");
 	walletAmount = pIn->GetInteger(pOut);
 
 	// [ Note ]:
@@ -37,6 +40,16 @@ void CardOne::ReadCardParameters(Grid * pGrid)
 
 }
 
+void CardOne::setWallet(int amount)
+{
+	walletAmount = amount;
+}
+
+int CardOne::getWallet()
+{
+	return walletAmount;
+}
+
 void CardOne::Apply(Grid* pGrid, Player* pPlayer)
 {
 		
@@ -46,7 +59,24 @@ void CardOne::Apply(Grid* pGrid, Player* pPlayer)
 	// == Here are some guideline steps (numbered below) (numbered below) to implement this function ==
 
 	// 1- Call Apply() of the base class Card to print the message that you reached this card number
-
+	Card::Apply(pGrid, pPlayer);
 	// 2- Decrement the wallet of pPlayer by the walletAmount data member of CardOne
+	if (cardNumber == 1)
+		pPlayer->DecrementWallet(walletAmount);
+	else
+		pPlayer->IncrementWallet(walletAmount);
 
 }
+
+void CardOne::Save(ofstream& OutFile)
+{
+	Card::Save(OutFile);
+	OutFile << walletAmount << endl;
+}
+
+void CardOne::Load(ifstream& InFile)
+{
+	Card::Load(InFile);
+	InFile >> walletAmount;
+}
+

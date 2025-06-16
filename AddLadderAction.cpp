@@ -21,19 +21,17 @@ void AddLadderAction::ReadActionParameters()
 	Input* pIn = pGrid->GetInput();
 
 	// Read the startPos parameter
-	pOut->PrintMessage("New Ladder: Click on its Start Cell ...");
-	startPos = pIn->GetCellClicked();
+	do
+	{
+		pOut->PrintMessage("New Ladder: Click on its Start Cell ...");
+		startPos = pIn->GetCellClicked();
 
-	// Read the endPos parameter
-	pOut->PrintMessage("New Ladder: Click on its End Cell ...");
-	endPos = pIn->GetCellClicked();
-
-    
-
-	///TODO: Make the needed validations on the read parameters
-
-	
-
+		// Read the endPos parameter
+		pOut->PrintMessage("New Ladder: Click on its End Cell ...");
+		endPos = pIn->GetCellClicked();
+		///TODO: Make the needed validations on the read parameters
+	} 
+	while (startPos.GetCellNum() > endPos.GetCellNum() || startPos.HCell() != endPos.HCell() || startPos.VCell() == NumVerticalCells - 1);
 	// Clear messages
 	pOut->ClearStatusBar();
 }
@@ -47,7 +45,7 @@ void AddLadderAction::Execute()
 	ReadActionParameters();
 
 	// Create a Ladder object with the parameters read from the user
-	Ladder * pLadder = new Ladder(startPos, endPos);
+	Ladder * pLadder = new Ladder(startPos, endPos,LadderType);
 
 	Grid * pGrid = pManager->GetGrid(); // We get a pointer to the Grid from the ApplicationManager
 
@@ -59,6 +57,7 @@ void AddLadderAction::Execute()
 	{
 		// Print an appropriate message
 		pGrid->PrintErrorMessage("Error: Cell already has an object ! Click to continue ...");
+		delete pLadder;
 	}
 	// Here, the ladder is created and added to the GameObject of its Cell, so we finished executing the AddLadderAction
 

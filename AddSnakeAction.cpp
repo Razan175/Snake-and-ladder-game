@@ -2,7 +2,7 @@
 
 #include "Input.h"
 #include "Output.h"
-#include "Snake.h"
+#include "Ladder.h"
 
 AddSnakeAction::AddSnakeAction(ApplicationManager* pApp) : Action(pApp)
 {
@@ -16,12 +16,15 @@ void AddSnakeAction::ReadActionParameters()
 	Input* pIn = pGrid->GetInput();
 
 	// Read the startPos parameter
-	pOut->PrintMessage("New Snake: Click on its Start Cell ...");
-	startPos = pIn->GetCellClicked();
+	do 
+	{
+		pOut->PrintMessage("New Snake: Click on its Start Cell ...");
+		startPos = pIn->GetCellClicked();
 
-	// Read the endPos parameter
-	pOut->PrintMessage("New Snake: Click on its End Cell ...");
-	endPos = pIn->GetCellClicked();
+		// Read the endPos parameter
+		pOut->PrintMessage("New Snake: Click on its End Cell ...");
+		endPos = pIn->GetCellClicked();
+	} while (startPos.GetCellNum() < endPos.GetCellNum() || startPos.HCell() != endPos.HCell() || startPos.VCell() == NumVerticalCells - 1);
 
 
 
@@ -40,7 +43,7 @@ void AddSnakeAction::Execute()
 	ReadActionParameters();
 
 	// Create a Ladder object with the parameters read from the user
-	Snake* pSnake = new Snake(startPos, endPos);
+	Ladder* pSnake = new Ladder(startPos, endPos,SnakeType);
 
 	Grid* pGrid = pManager->GetGrid(); // We get a pointer to the Grid from the ApplicationManager
 
@@ -52,6 +55,7 @@ void AddSnakeAction::Execute()
 	{
 		// Print an appropriate message
 		pGrid->PrintErrorMessage("Error: Cell already has an object ! Click to continue ...");
+		delete pSnake;
 	}
 	// Here, the ladder is created and added to the GameObject of its Cell, so we finished executing the AddLadderAction
 

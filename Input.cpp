@@ -84,13 +84,18 @@ ActionType Input::GetUserAction() const
 			case ITM_ADD_LADDER: return ADD_LADDER;
 			case ITM_ADD_SNAKE: return ADD_SNAKE;
 			case ITM_ADD_CARD: return ADD_CARD;
+			case ITM_DELETE: return DELETE_OBJECT;
+			case ITM_COPY: return COPY;
+			case ITM_CUT: return CUT;
+			case ITM_PASTE: return PASTE;
+			case ITM_SAVE: return SAVE;
+			case ITM_LOAD: return LOAD;
+			case ITM_CLEAR: return CLEAR;
 			case ITM_EXIT: return EXIT;
-			case ITM_SWITCH_TO_PLAY_MODE: return TO_PLAY_MODE;			
+			case ITM_SWITCH_TO_PLAY_MODE: return TO_PLAY_MODE;	
+
 
 				///TODO: Add cases for the other items of Design Mode
-
-
-
 
 			default: return EMPTY;	// A click on empty place in toolbar
 			}
@@ -112,11 +117,37 @@ ActionType Input::GetUserAction() const
 		///TODO:
 		// perform checks similar to Design mode checks above for the Play Mode
 		// and return the corresponding ActionType
+		if (y >= 0 && y < UI.ToolBarHeight)
+		{
+			// Check which Menu item was clicked
+			// ==> This assumes that menu items are lined up horizontally <==
 
-		return TO_DESIGN_MODE;	// just for now ==> This should be updated
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
+
+			// Divide x coord of the point clicked by the menu item width (integer division)
+			// If division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+
+			switch (ClickedItemOrder)
+			{
+			case ITM_ROLL_DICE: return ROLL_DICE;
+			case ITM_NEW_GAME: return NEW_GAME;
+			case ITM_SWITCH_TO_DESIGN_MODE: return TO_DESIGN_MODE;
+
+				///TODO: Add cases for the other items of Design Mode
 
 
+			default: return EMPTY;	// A click on empty place in toolbar
+			}
+		}
 
+		// [2] User clicks on the grid area
+		if ((y >= UI.ToolBarHeight) && (y < UI.height - UI.StatusBarHeight))
+		{
+			return GRID_AREA;
+		}
+
+		// [3] User clicks on the status bar
+		return STATUS;
 
 	}	
 

@@ -16,13 +16,13 @@ public:
 	// Cell Numbers (CellNum) should be from 1 to 99
 	// Numbered from [left-to-right] [bottom-up], as follows:
 
-	// hCell (right):   0    1   ...   10
+	// hCell (right):   0    1     2    3   4    5   6    7   8    9     10
 	// vCell (below):
-	//   0             C89  C90  ...  C99
-	//   1             C78  C79  ...  C88
-	//  ...            ...  ...  ...  ...
-	//   7             C12  C13  ...  C22
-	//   8             C1   C2   ...  C11
+	//   0             C89   C90  C91  C92 C93  C94  C95  C96 C97  C98  C99
+	//   1             C78   C79  C80  C81 C82  C83  C84  C85 C87  C86  C88
+	//   6             C23  C24  C25  C26  C27  C28   C29  C30 C31 C32 C33
+	//   7             C12  C13  C14  C15  C16  C17   C18  C19 C20 C21 C22
+	//   8             C1   C2   C3   C4   C5   C6    C7   C8  C9  C10  C11
 
 	// In the Grid above, C13 has vCell = 7 and hCell = 1
 	

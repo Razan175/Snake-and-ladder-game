@@ -1,11 +1,10 @@
 #include "Cell.h"
 
 #include "Grid.h"
-#include "GameObject.h"
 #include "Ladder.h"
 #include "Card.h"
 #include "Player.h"
-#include "Snake.h"
+
 
 Cell::Cell(const CellPosition & pos) : position(pos)
 {
@@ -37,6 +36,11 @@ bool Cell::SetGameObject(GameObject * pGObj)
 	return true;
 }
 
+void Cell::RemoveGameObject()
+{
+	pGameObject = NULL;
+}
+
 GameObject * Cell::GetGameObject() const
 {
 	return pGameObject;
@@ -44,23 +48,28 @@ GameObject * Cell::GetGameObject() const
 
 Ladder * Cell::HasLadder() const
 {
-	return dynamic_cast<Ladder *>(pGameObject);
+
+	if (pGameObject && pGameObject->GetType() == LadderType)
+		return dynamic_cast<Ladder*>(pGameObject); // THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
+	else
+		return NULL;
 }
 
-Snake * Cell::HasSnake() const
+Ladder * Cell::HasSnake() const
 {
 
 	///TODO: Implement the following function like HasLadder() function
-
-	return dynamic_cast<Snake *>(pGameObject); // THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
+	if (pGameObject && pGameObject->GetType() == SnakeType)
+		return dynamic_cast<Ladder*>(pGameObject); // THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
+	else
+		return NULL;
 }
 
 Card * Cell::HasCard() const
 {
 
 	///TODO: Implement the following function like HasLadder() function
-
-	return dynamic_cast<Card*>(pGameObject); // THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
+		return dynamic_cast<Card*>(pGameObject); // THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
 
 }
 
@@ -82,4 +91,10 @@ void Cell::DrawLadderOrSnake(Output* pOut) const
 	if (HasLadder() || HasSnake())
 		pGameObject->Draw(pOut); // draw it either ladder or snake
 
+}
+
+Cell::~Cell()
+{
+	if (pGameObject)
+		delete pGameObject;
 }

@@ -12,14 +12,21 @@ enum ActionType // The actions supported (add more as needed)
 	ADD_LADDER,		// Add Ladder Action
 	ADD_SNAKE,		// Add Snake Action	
 	ADD_CARD,		// Add Card Action	
-	EXIT,			// Exit Application
+	DELETE_OBJECT,
+	COPY,
+	CUT,
+	PASTE,
+	SAVE,
+	LOAD,
+	CLEAR,
 	TO_PLAY_MODE,	// Go to Play Mode
-
+	EXIT,			// Exit Application
 	///TODO: Add more action types of Design Mode
 
 	//  [2] Actions of Play Mode
 
 	ROLL_DICE,		// Roll Dice Action
+	NEW_GAME,
 	TO_DESIGN_MODE,	// Go to Design Mode
 
 	///TODO: Add more action types of Play Mode
@@ -31,4 +38,10 @@ enum ActionType // The actions supported (add more as needed)
 	STATUS 				// Inside StatusBar Area
 };
 
+enum GameObjectType
+{
+	LadderType,
+	SnakeType,
+	CardType
+};
 #endif

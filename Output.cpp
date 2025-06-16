@@ -202,6 +202,13 @@ void Output::CreateDesignModeToolBar() const
 	MenuItemImages[ITM_ADD_LADDER] = "images\\Menu_Ladder.jpg";	
 	MenuItemImages[ITM_ADD_SNAKE] = "images\\Menu_Snake.jpg";	
 	MenuItemImages[ITM_ADD_CARD] = "images\\Menu_Card.jpg";	
+	MenuItemImages[ITM_DELETE] = "images\\Menu_Delete.jpg";
+	MenuItemImages[ITM_COPY] = "images\\Menu_Copy.jpg";
+	MenuItemImages[ITM_CUT] = "images\\Menu_CUT.jpg";
+	MenuItemImages[ITM_PASTE] = "images\\Menu_Paste.jpg";
+	MenuItemImages[ITM_SAVE] = "images\\Menu_Save.jpg";
+	MenuItemImages[ITM_LOAD] = "images\\Menu_Load.jpg";
+	MenuItemImages[ITM_CLEAR] = "images\\Menu_Clear.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu_Exit.jpg";
 	MenuItemImages[ITM_SWITCH_TO_PLAY_MODE] = "images\\Menu_SwitchToGame.jpg";
 
@@ -233,6 +240,7 @@ void Output::CreatePlayModeToolBar() const
 	// ** MAKE SURE THAT THE IMAGES ARE .JPG FILES **
 	string MenuItemImages[PLAY_ITM_COUNT];
 	MenuItemImages[ITM_ROLL_DICE] = "images\\Menu_Dice.jpg";
+	MenuItemImages[ITM_NEW_GAME] = "images\\Menu_New.jpg";
 	MenuItemImages[ITM_SWITCH_TO_DESIGN_MODE] = "images\\Menu_SwitchToGrid.jpg";
 
 	///TODO: Prepare images for each menu item and add it to the list
@@ -374,6 +382,7 @@ void Output::DrawPlayer(const CellPosition & cellPos, int playerNum, color playe
 
 	///TODO: Draw the player circle in center(x,y) and filled with the playerColor passed to the function
 	pWind->SetBrush(playerColor);
+	pWind->SetPen(playerColor);
 	pWind->DrawCircle(x, y, radius);
 
 	
@@ -385,7 +394,7 @@ void Output::DrawLadder(const CellPosition & fromCell, const CellPosition & toCe
 {
 
 	///TODO: Validate the Cell Position (Must be Vertical Cells AND toCell below fromCell, otherwise, Do NOT draw)
-	if (toCell.VCell() < fromCell.VCell() || toCell.HCell() != fromCell.HCell())
+	if (toCell.VCell() > fromCell.VCell() || toCell.HCell() != fromCell.HCell())
 		return;
 	
 	// Get the start X and Y coordinates of the upper left corner of the fromCell
@@ -427,9 +436,9 @@ void Output::DrawLadder(const CellPosition & fromCell, const CellPosition & toCe
 
 	///TODO: Draw the cross horizontal lines of the ladder using the appropriate coordinates
 
-	int y12 = y1 + (UI.CellHeight/2);
+	int y12 = y2 + (UI.CellHeight/2);
 
-	while (y12 < y2)
+	while (y12 < y1)
 	{
 		pWind->SetPen(UI.LadderColor, UI.LadderlineWidth);
 		pWind->DrawLine(x12, y12, x34, y12);

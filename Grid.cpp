@@ -1,10 +1,11 @@
 #include "Grid.h"
-
 #include "Cell.h"
 #include "GameObject.h"
 #include "Ladder.h"
 #include "Card.h"
 #include "Player.h"
+#include "CardOne.h"
+
 
 Grid::Grid(Input * pIn, Output * pOut) : pIn(pIn), pOut(pOut) // Initializing pIn, pOut
 {
@@ -32,11 +33,16 @@ Grid::Grid(Input * pIn, Output * pOut) : pIn(pIn), pOut(pOut) // Initializing pI
 
 	// Initialize endGame with false
 	endGame = false;
+
+	gameOn = false;
+
+	ladderNumber = 0;
+	snakeNumber = 0;
+	cardNumber = 0;
 }
 
 
 // ========= Adding or Removing GameObjects to Cells =========
-
 
 bool Grid::AddObjectToCell(GameObject * pNewObject)  // think if any validation is needed
 {
@@ -46,11 +52,28 @@ bool Grid::AddObjectToCell(GameObject * pNewObject)  // think if any validation 
 	{
 		// Get the previous GameObject of the Cell
 		GameObject * pPrevObject = CellList[pos.VCell()][pos.HCell()]->GetGameObject();
+
 		if( pPrevObject)  // the cell already contains a game object
 			return false; // do NOT add and return false
-
 		// Set the game object of the Cell with the new game object
+
+		if (pNewObject->GetType() == LadderType || pNewObject->GetType() == SnakeType)
+		{
+			Ladder* p = dynamic_cast<Ladder*>(pNewObject);
+			pPrevObject = CellList[p->GetEndPosition().VCell()][p->GetEndPosition().HCell()]->GetGameObject();
+			if (pPrevObject)  // the cell already contains a game object
+				return false; // do NOT add and return false
+		}
+		
 		CellList[pos.VCell()][pos.HCell()]->SetGameObject(pNewObject);
+
+		if (CellList[pos.VCell()][pos.HCell()]->HasSnake())
+			snakeNumber++;
+		else if (CellList[pos.VCell()][pos.HCell()]->HasLadder())
+			ladderNumber++;
+		else if (CellList[pos.VCell()][pos.HCell()]->HasCard())
+			cardNumber++;
+
 		return true; // indicating that addition is done
 	}
 	return false; // if not a valid position
@@ -61,8 +84,17 @@ void Grid::RemoveObjectFromCell(const CellPosition & pos)
 	if (pos.IsValidCell()) // Check if valid position
 	{
 		// Note: you can deallocate the object here before setting the pointer to null if it is needed
+		if (CellList[pos.VCell()][pos.HCell()]->HasSnake())
+			snakeNumber--;
+		else if (CellList[pos.VCell()][pos.HCell()]->HasLadder())
+			ladderNumber--;
+		else if (CellList[pos.VCell()][pos.HCell()]->HasCard())
+			cardNumber--;
 
-		CellList[pos.VCell()][pos.HCell()]->SetGameObject(NULL);
+		if (CellList[pos.VCell()][pos.HCell()]->GetGameObject() != Clipboard)
+			delete CellList[pos.VCell()][pos.HCell()]->GetGameObject();
+
+		CellList[pos.VCell()][pos.HCell()]->RemoveGameObject();
 	}
 }
 
@@ -77,6 +109,26 @@ void Grid::UpdatePlayerCell(Player * player, const CellPosition & newPosition)
 
 	// Draw the player's circle on the new cell position
 	player->Draw(pOut);
+}
+
+void Grid::ResetPlayers()
+{
+	for (int i = 0; i < MaxPlayerCount; i++)
+	{
+		PlayerList[i]->ResetPlayer();
+		UpdatePlayerCell(PlayerList[i], CellList[NumVerticalCells - 1][0]->GetCellPosition());
+	}
+
+}
+
+void Grid::ClearGrid()
+{
+	// Allocate the Cell Objects of the CellList
+	for (int i = NumVerticalCells - 1; i >= 0; i--) // to allocate cells from bottom up
+		for (int j = 0; j < NumHorizontalCells; j++) // to allocate cells from left to right
+			CellList[i][j]->RemoveGameObject();
+
+	ResetPlayers();
 }
 
 
@@ -117,6 +169,16 @@ bool Grid::GetEndGame() const
 void Grid::AdvanceCurrentPlayer()
 {
 	currPlayerNumber = (currPlayerNumber + 1) % MaxPlayerCount; // this generates value from 0 to MaxPlayerCount - 1
+}
+
+bool Grid::IsGameOn()
+{
+	return gameOn;
+}
+
+void Grid::SetGameOn(bool gOn)
+{
+	gameOn = gOn;
 }
 
 // ========= Other Getters =========
@@ -181,6 +243,7 @@ void Grid::UpdateInterface() const
 	else // In PLAY Mode
 	{
 		// 1- Print Player's Info
+		pOut->CreatePlayModeToolBar();
 		string playersInfo = "";
 		for (int i = 0; i < MaxPlayerCount; i++)
 		{
@@ -206,6 +269,111 @@ void Grid::PrintErrorMessage(string msg)
 	pOut->ClearStatusBar();
 }
 
+
+bool Grid::Copy(CellPosition cellCopy)
+{
+	if (CellList[cellCopy.VCell()][cellCopy.HCell()]->HasCard())
+	{
+		SetClipboard((Card*)CellList[cellCopy.VCell()][cellCopy.HCell()]->GetGameObject());
+		return true;
+	}
+	return false;
+}
+
+bool Grid::Paste(CellPosition cellPaste)
+{
+	if (!CellList[cellPaste.VCell()][cellPaste.HCell()]->GetGameObject() && Clipboard)
+	{
+		bool flag = false;
+		switch (Clipboard->GetCardNumber())
+		{
+			case 1:
+			case 2:
+			CardOne * tempCard;
+			tempCard = dynamic_cast<CardOne*>(Clipboard);
+
+			CardOne * newCard = new CardOne(cellPaste, Clipboard->GetCardNumber());
+			newCard->setWallet(tempCard->getWallet());
+			flag = AddObjectToCell(newCard);
+			break;
+		}
+		return flag;
+	}
+	return false;
+}
+
+void Grid::SaveAll(ofstream& OutFile, GameObjectType Type)
+{
+	switch (Type)
+	{
+	case LadderType:
+		OutFile << ladderNumber << endl;
+		for (int i = NumVerticalCells - 1; i >= 0; i--)
+			for (int j = 0; j < NumHorizontalCells; j++)
+				if (CellList[i][j]->HasLadder())
+					CellList[i][j]->GetGameObject()->Save(OutFile);
+		break;
+	case SnakeType:
+		OutFile << snakeNumber << endl;
+		for (int i = NumVerticalCells - 1; i >= 0; i--)
+			for (int j = 0; j < NumHorizontalCells; j++)
+				if (CellList[i][j]->HasSnake())
+					CellList[i][j]->GetGameObject()->Save(OutFile);
+		break;
+	case CardType:
+		OutFile << cardNumber << endl;
+		for (int i = NumVerticalCells - 1; i >= 0; i--)
+			for (int j = 0; j < NumHorizontalCells; j++)
+				if (CellList[i][j]->HasCard())
+					CellList[i][j]->GetGameObject()->Save(OutFile);
+	}
+
+}
+
+void Grid::LoadAll(ifstream& InFile)
+{
+	ClearGrid();
+
+	int lNum;
+	InFile >> lNum;
+	Ladder* l = NULL;
+	for (int i = 0; i < lNum; i++)
+	{
+		l = new Ladder(0,0,LadderType);
+		l->Load(InFile);
+		AddObjectToCell(l);
+		l = NULL;
+	}
+	int sNum;
+	InFile >> sNum;
+	Ladder* s = NULL;
+	for (int i = 0; i < sNum; i++)
+	{
+		s = new Ladder(0,0,SnakeType);
+		s->Load(InFile);
+		AddObjectToCell(s);
+		s = NULL;
+	}
+
+	int cNum;
+	InFile >> cNum;
+	Card* c = NULL;
+	for (int i = 0; i < cNum; i++)
+	{
+		int cardNo;
+		InFile >> cardNo;
+		switch (cardNo)
+		{
+			case 1:
+			case 2:
+			c = new CardOne(0,cardNo);
+			break;
+		}
+		c->Load(InFile);
+		AddObjectToCell(c);
+		c = NULL;
+	}
+}
 
 Grid::~Grid()
 {

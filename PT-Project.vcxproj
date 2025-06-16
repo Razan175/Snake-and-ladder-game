@@ -137,6 +137,7 @@
     <ClCompile Include="CardOne.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="CellPosition.cpp" />
+    <ClCompile Include="ClearAction.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
     <ClCompile Include="CMUgraphicsLib\colors.cpp" />
@@ -173,15 +174,22 @@
     <ClCompile Include="CMUgraphicsLib\jpeg\jquant1.c" />
     <ClCompile Include="CMUgraphicsLib\jpeg\jquant2.c" />
     <ClCompile Include="CMUgraphicsLib\jpeg\jutils.c" />
+    <ClCompile Include="CopyAction.cpp" />
+    <ClCompile Include="CutAction.cpp" />
+    <ClCompile Include="DeleteObjectAction.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Ladder.cpp" />
+    <ClCompile Include="LoadAction.cpp" />
+    <ClCompile Include="NewGameAction.cpp" />
     <ClCompile Include="Output.cpp" />
+    <ClCompile Include="PasteAction.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="RollDiceAction.cpp" />
-    <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="SaveAction.cpp" />
+    <ClCompile Include="SwitchAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
@@ -193,6 +201,7 @@
     <ClInclude Include="CardOne.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="CellPosition.h" />
+    <ClInclude Include="ClearAction.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />
     <ClInclude Include="CMUgraphicsLib\colors.h" />
@@ -213,15 +222,22 @@
     <ClInclude Include="CMUgraphicsLib\jpeg\jpegint.h" />
     <ClInclude Include="CMUgraphicsLib\jpeg\jpeglib.h" />
     <ClInclude Include="CMUgraphicsLib\jpeg\jversion.h" />
+    <ClInclude Include="CopyAction.h" />
+    <ClInclude Include="CutAction.h" />
     <ClInclude Include="DEFS.h" />
+    <ClInclude Include="DeleteObjectAction.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Ladder.h" />
+    <ClInclude Include="LoadAction.h" />
+    <ClInclude Include="NewGameAction.h" />
     <ClInclude Include="Output.h" />
+    <ClInclude Include="PasteAction.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RollDiceAction.h" />
-    <ClInclude Include="Snake.h" />
+    <ClInclude Include="SaveAction.h" />
+    <ClInclude Include="SwitchAction.h" />
     <ClInclude Include="UI_Info.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

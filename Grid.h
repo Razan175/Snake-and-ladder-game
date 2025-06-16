@@ -30,7 +30,12 @@ class Grid
 	Card * Clipboard;	   // This is used in copy/cut/paste card (should be set in copy/cut and got in paste)
 
 	bool endGame;	       // A boolean indicating if the Game is ended or not (a player reaches the end cell of the grid or not)
-
+	
+	bool gameOn;
+	
+	int ladderNumber;
+	int snakeNumber;
+	int cardNumber;
 public:
 
 	Grid(Input * pIn, Output * pOut);	  // Gives the Grid a Pointer to the Output Object and the Input Object
@@ -46,7 +51,8 @@ public:
 
 	void UpdatePlayerCell(Player * player, const CellPosition & newPosition); // Update the player's pCell with the CellList's Cell pointer of the "newPosition",
 	                                                                          // Clears the player's circle from the previous cell
-	    																	  // and  Draws it in the new cell
+	void ResetPlayers(); 																	  // and  Draws it in the new cell
+	void ClearGrid();
 
 	// ========= Setters and Getters Functions =========
 
@@ -61,6 +67,8 @@ public:
 
 	void AdvanceCurrentPlayer();     // Increments the currPlayerNum and if reaches MaxPlayerCount reset to 0 (using %)
 
+	bool IsGameOn();
+	void SetGameOn(bool gOn);
 	///TODO: add any needed setter/getter "EXCEPT" ANY setters or getters of "CellList" or "PlayerList" (Forbidden for class Responsibilities)
 
 	// ========= Other Getters =========
@@ -78,7 +86,12 @@ public:
 
 	void PrintErrorMessage(string msg); // Prints an error message on statusbar, Waits for mouse click then clears statusbar
 									    // We added this function once here because it is used many times by other classes
+	
+	bool Copy(CellPosition cellCopy);
+	bool Paste(CellPosition cellPaste);
 
+	virtual void SaveAll(ofstream& OutFile, GameObjectType );
+	virtual void LoadAll(ifstream& InFile);
 	~Grid(); // A destructor for any needed deallcations
 };
 

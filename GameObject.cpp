@@ -11,6 +11,10 @@ CellPosition GameObject::GetPosition() const
 	return position;
 }
 
+GameObjectType GameObject::GetType()
+{
+	return Type;
+}
 GameObject::~GameObject()
 {
 }
