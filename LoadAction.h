@@ -1,11 +1,6 @@
 #pragma once
 #include "Action.h"
 
-#include <fstream>
-#include <iostream>
-
-using namespace std;
-
 class LoadAction : public Action
 {
 	// [Action Parameters]

@@ -48,7 +48,7 @@ void Card::Load(ifstream& InFile)
 {
 	int cNum;
 	InFile >> cNum;
-	position.AddCellNum(cNum);
+	position = position.GetCellPositionFromNum(cNum);
 }
 
 Card::~Card()

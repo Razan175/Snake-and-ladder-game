@@ -6,6 +6,14 @@ Player::Player(Cell * pCell, int playerNum) : stepCount(0), wallet(100), playerN
 {
 	this->pCell = pCell;
 	this->turnCount = 0;
+	if (UI.PlayerColors[playerNum] == BLUE)
+		playerColor = "BLUE";
+	else if (UI.PlayerColors[playerNum] == RED)
+		playerColor = "RED";
+	else if (UI.PlayerColors[playerNum] == GREEN)
+		playerColor = "GREEN";
+	else if (UI.PlayerColors[playerNum] == PURPLE)
+		playerColor = "PURPLE";
 
 	// Make all the needed initialization or validations
 }
@@ -50,6 +58,11 @@ void Player::ResetPlayer()
 	turnCount = 0;
 }
 
+int Player::GetDice()
+{
+	return justRolledDiceNum;
+}
+
 // ====== Drawing Functions ======
 
 void Player::Draw(Output* pOut) const
@@ -82,15 +95,13 @@ void Player::Move(Grid * pGrid, int diceNumber)
 
 
 	// 1- Increment the turnCount because calling Move() means that the player has rolled the dice once
-	if (turnCount < 3)
-		turnCount++;
-	else
-		turnCount = 0;
+	turnCount++;
 	// 2- Check the turnCount to know if the wallet recharge turn comes (recharge wallet instead of move)
 	//    If yes, recharge wallet and reset the turnCount and return from the function (do NOT move)
 	if (turnCount == 3)
 	{
 		wallet += (10 * diceNumber);
+		turnCount = 0;
 		return;
 	}
 		// 3- Set the justRolledDiceNum with the passed diceNumber
@@ -107,12 +118,15 @@ void Player::Move(Grid * pGrid, int diceNumber)
 		pCell->GetGameObject()->Apply(pGrid,this);
 	// 7- Check if the player reached the end cell of the whole game, and if yes, Set end game with true: pGrid->SetEndGame(true)
 	if (pCell->GetCellPosition().GetCellNum() == 99)
+	{
 		pGrid->SetEndGame(true);
+		pGrid->SetGameOn(false);
+	}
 }
 
 void Player::AppendPlayerInfo(string & playersInfo) const
 {
-	playersInfo += "P" + to_string(playerNum) + "(" ;
+	playersInfo += playerColor + "(" ;
 	playersInfo += to_string(wallet) + ", ";
 	playersInfo += to_string(turnCount) + ")";
 }
@@ -125,4 +139,9 @@ void Player::IncrementWallet(int amount)
 void Player::DecrementWallet(int amount)
 {
 	wallet -= amount;
+}
+
+string Player::GetPlayerColor()
+{
+	return playerColor;
 }

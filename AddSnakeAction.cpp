@@ -16,21 +16,17 @@ void AddSnakeAction::ReadActionParameters()
 	Input* pIn = pGrid->GetInput();
 
 	// Read the startPos parameter
-	do 
-	{
-		pOut->PrintMessage("New Snake: Click on its Start Cell ...");
-		startPos = pIn->GetCellClicked();
 
-		// Read the endPos parameter
-		pOut->PrintMessage("New Snake: Click on its End Cell ...");
-		endPos = pIn->GetCellClicked();
-	} while (startPos.GetCellNum() < endPos.GetCellNum() || startPos.HCell() != endPos.HCell() || startPos.VCell() == NumVerticalCells - 1);
+	pOut->PrintMessage("New Snake: Click on its Start Cell ...");
+	startPos = pIn->GetCellClicked();
 
-
-
+	// Read the endPos parameter
+	pOut->PrintMessage("New Snake: Click on its End Cell ...");
+	endPos = pIn->GetCellClicked();
+	
 	///TODO: Make the needed validations on the read parameters
-
-
+	if (startPos.GetCellNum() < endPos.GetCellNum() || startPos.HCell() != endPos.HCell() || startPos.VCell() == NumVerticalCells - 1)
+		pOut->PrintMessage("Invalid start and end positions.. please try again");
 
 	// Clear messages
 	pOut->ClearStatusBar();
@@ -41,7 +37,8 @@ void AddSnakeAction::Execute()
 	// The first line of any Action Execution is to read its parameter first 
 	// and hence initializes its data members
 	ReadActionParameters();
-
+	if (startPos.GetCellNum() < endPos.GetCellNum() || startPos.HCell() != endPos.HCell() || startPos.VCell() == NumVerticalCells - 1)
+	return;
 	// Create a Ladder object with the parameters read from the user
 	Ladder* pSnake = new Ladder(startPos, endPos,SnakeType);
 

@@ -1,7 +1,10 @@
 #include "LoadAction.h"
 #include "Grid.h"
 
+#include <fstream>
+#include <iostream>
 
+using namespace std;
 LoadAction::LoadAction(ApplicationManager* pApp) :Action(pApp)
 {
 }
@@ -23,7 +26,7 @@ void LoadAction::Execute()
 {
 	ReadActionParameters();
 	ifstream file;
-	file.open(filename + ".txt");
+	file.open("SavedGrids/" + filename + ".txt");
 
 	if (file.fail())
 		return;

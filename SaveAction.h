@@ -1,9 +1,6 @@
 #pragma once
 #include "Action.h"
 
-#include <fstream>
-#include <iostream>
-using namespace std;
 
 class SaveAction : public Action
 {

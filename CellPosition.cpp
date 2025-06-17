@@ -96,8 +96,10 @@ CellPosition CellPosition::GetCellPositionFromNum(int cellNum)
 	CellPosition position;
 	
 	/// TODO: Implement this function as described in the .h file
-
-	int vPos = NumVerticalCells - floor((double)cellNum / NumHorizontalCells) - 1;
+	int vPosAct = floor((double)cellNum / NumHorizontalCells);
+	if (((double)cellNum / NumHorizontalCells) == vPosAct)
+		vPosAct--;
+	int vPos = NumVerticalCells - vPosAct - 1;
 	int hPos = cellNum - ((NumVerticalCells - vPos - 1) * NumHorizontalCells) - 1;
 	
 	position.SetHCell(hPos);
@@ -114,6 +116,8 @@ void CellPosition::AddCellNum (int addedNum)
 	/// TODO: Implement this function as described in the .h file
 
 	int cellNum = GetCellNum() + addedNum;
+	if (cellNum > 99)
+		cellNum = 99;
 	CellPosition p = GetCellPositionFromNum(cellNum);
 
 	SetHCell(p.HCell());

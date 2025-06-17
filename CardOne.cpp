@@ -61,6 +61,12 @@ void CardOne::Apply(Grid* pGrid, Player* pPlayer)
 	// 1- Call Apply() of the base class Card to print the message that you reached this card number
 	Card::Apply(pGrid, pPlayer);
 	// 2- Decrement the wallet of pPlayer by the walletAmount data member of CardOne
+	Output* pOut = pGrid->GetOutput();
+	Input* pIn = pGrid->GetInput();
+
+	pOut->PrintMessage("You have reached Card " + to_string(cardNumber) + " Click to Continue...");
+	pIn->GetCellClicked();
+
 	if (cardNumber == 1)
 		pPlayer->DecrementWallet(walletAmount);
 	else

@@ -226,6 +226,8 @@
     <ClCompile Include="RollDiceAction.cpp">
       <Filter>Actions\Game Mode Actions</Filter>
     </ClCompile>
+    <ClCompile Include="CardThreeFour.cpp" />
+    <ClCompile Include="CardFiveSix.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -367,5 +369,7 @@
     <ClInclude Include="RollDiceAction.h">
       <Filter>Actions\Game Mode Actions</Filter>
     </ClInclude>
+    <ClInclude Include="CardThreeFour.h" />
+    <ClInclude Include="CardFiveSix.h" />
   </ItemGroup>
 </Project>

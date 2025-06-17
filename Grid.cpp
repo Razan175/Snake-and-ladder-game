@@ -5,8 +5,8 @@
 #include "Card.h"
 #include "Player.h"
 #include "CardOne.h"
-
-
+#include "CardThreeFour.h"
+#include "CardFiveSix.h"
 Grid::Grid(Input * pIn, Output * pOut) : pIn(pIn), pOut(pOut) // Initializing pIn, pOut
 {
 	// Allocate the Cell Objects of the CellList
@@ -113,6 +113,8 @@ void Grid::UpdatePlayerCell(Player * player, const CellPosition & newPosition)
 
 void Grid::ResetPlayers()
 {
+	currPlayerNumber = 0;
+	endGame = false;
 	for (int i = 0; i < MaxPlayerCount; i++)
 	{
 		PlayerList[i]->ResetPlayer();
@@ -171,7 +173,7 @@ void Grid::AdvanceCurrentPlayer()
 	currPlayerNumber = (currPlayerNumber + 1) % MaxPlayerCount; // this generates value from 0 to MaxPlayerCount - 1
 }
 
-bool Grid::IsGameOn()
+bool Grid::IsGameOn() 
 {
 	return gameOn;
 }
@@ -200,15 +202,32 @@ Ladder * Grid::GetNextLadder(const CellPosition & position)
 
 
 			///TODO: Check if CellList[i][j] has a ladder, if yes return it
-			
-
+			if (CellList[i][j]->HasLadder())
+				return (Ladder*)CellList[i][j]->GetGameObject();
 		}
 		startH = 0; // because in the next above rows, we will search from the first left cell (hCell = 0) to the right
 	}
 	return NULL; // not found
 }
 
+Ladder* Grid::GetNextSnake(const CellPosition& position)
+{
 
+	int startH = position.HCell(); // represents the start hCell in the current row to search for the ladder in
+	for (int i = position.VCell(); i >= 0; i--) // searching from position.vCell and ABOVE
+	{
+		for (int j = startH; j < NumHorizontalCells; j++) // searching from startH and RIGHT
+		{
+
+
+			///TODO: Check if CellList[i][j] has a ladder, if yes return it
+			if (CellList[i][j]->HasSnake())
+				return (Ladder*)CellList[i][j]->GetGameObject();
+		}
+		startH = 0; // because in the next above rows, we will search from the first left cell (hCell = 0) to the right
+	}
+	return NULL; // not found
+}
 // ========= User Interface Functions =========
 
 
@@ -282,6 +301,8 @@ bool Grid::Copy(CellPosition cellCopy)
 
 bool Grid::Paste(CellPosition cellPaste)
 {
+	CardOne* newCard1;
+	CardThreeFour* newCard2;
 	if (!CellList[cellPaste.VCell()][cellPaste.HCell()]->GetGameObject() && Clipboard)
 	{
 		bool flag = false;
@@ -289,12 +310,23 @@ bool Grid::Paste(CellPosition cellPaste)
 		{
 			case 1:
 			case 2:
-			CardOne * tempCard;
-			tempCard = dynamic_cast<CardOne*>(Clipboard);
+			CardOne * tempCard1;
+			tempCard1 = dynamic_cast<CardOne*>(Clipboard);
+			newCard1 = new CardOne(cellPaste, Clipboard->GetCardNumber());
+			newCard1->setWallet(tempCard1->getWallet());
+			flag = AddObjectToCell(newCard1);
+			break;
 
-			CardOne * newCard = new CardOne(cellPaste, Clipboard->GetCardNumber());
-			newCard->setWallet(tempCard->getWallet());
-			flag = AddObjectToCell(newCard);
+			case 3:
+			case 4:
+			newCard2 = new CardThreeFour(cellPaste, Clipboard->GetCardNumber());
+			flag = AddObjectToCell(newCard2);
+			break;
+
+			case 5:
+			case 6:
+			CardFiveSix * newCard3 = new CardFiveSix(cellPaste, Clipboard->GetCardNumber());
+			flag = AddObjectToCell(newCard3);
 			break;
 		}
 		return flag;

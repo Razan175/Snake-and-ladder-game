@@ -1,7 +1,10 @@
 #pragma once
+
 #include "Action.h"
+
 class SwitchAction : public Action
 {
+public:
 	SwitchAction(ApplicationManager* pApp);  // Constructor
 
 	// ============ Virtual Functions ============

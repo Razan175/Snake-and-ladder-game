@@ -16,6 +16,7 @@ class Player
 	int turnCount;         // a counter that starts with 0, is incremented with each dice roll
 	                       // and reset again when reached 3
 	                       // it is used to indicate when to move and when to add to your wallet
+	string playerColor;
 	
 public:
 
@@ -34,6 +35,8 @@ public:
 	int GetPlayerNum();
 
 	void ResetPlayer();
+
+	int GetDice();
 
 	///TODO: You can add setters and getters for data members here (if needed)
 
@@ -54,6 +57,8 @@ public:
 
 	void IncrementWallet(int amount);
 	void DecrementWallet(int amount);
+
+	string GetPlayerColor();
 
 };
 

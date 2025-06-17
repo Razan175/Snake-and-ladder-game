@@ -1,6 +1,9 @@
 #include "SaveAction.h"
 #include "Grid.h"
 
+#include <fstream>
+#include <iostream>
+using namespace std;
 
 SaveAction::SaveAction(ApplicationManager* pApp):Action(pApp)
 {
@@ -23,7 +26,7 @@ void SaveAction::Execute()
 {
 	ReadActionParameters();
 	ofstream file;
-	file.open(filename + ".txt");
+	file.open("SavedGrids/" +  filename + ".txt");
 
 	if (file.fail())
 		return;

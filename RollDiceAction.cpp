@@ -45,7 +45,9 @@ void RollDiceAction::Execute()
 
 	// NOTE: the above guidelines are the main ones but not a complete set (You may need to add more steps).
 	if (!pGrid->GetEndGame())
-		pOut->PrintMessage("Player " + to_string(pGrid->GetCurrentPlayer()->GetPlayerNum()) + " 's turn. Please roll the dice..");
+		pOut->PrintMessage(pGrid->GetCurrentPlayer()->GetPlayerColor() + " 's turn. Please roll the dice..");
+	else
+		pOut->PrintMessage(p->GetPlayerColor() + " Won!!! play again?[y/n]");
 }
 
 RollDiceAction::~RollDiceAction()

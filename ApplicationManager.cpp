@@ -14,6 +14,7 @@
 #include "CutAction.h"
 #include "ClearAction.h"
 #include "NewGameAction.h"
+#include "SwitchAction.h"
 
 ApplicationManager::ApplicationManager()
 {
@@ -97,10 +98,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case EXIT:
 		break;
+	case TO_DESIGN_MODE:
 	case TO_PLAY_MODE:
-		pOut->CreatePlayModeToolBar(); // temporary till you made its action class (CHANGE THIS LATTER)
+		pAct = new SwitchAction(this);
 		break;
-
 	case ROLL_DICE:
 		// create an object of RollDiceAction here
 		if (pGrid->IsGameOn())
@@ -109,10 +110,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case NEW_GAME:
 		pAct = new NewGameAction(this);
 		break;
-	case TO_DESIGN_MODE:
-		pOut->CreateDesignModeToolBar(); // temporary till you made its action class (CHANGE THIS LATTER)
-		break;
-
 		///TODO: Add a case for EACH Action type in the Design mode or Play mode
 
 	case STATUS:	// a click on the status bar ==> no action

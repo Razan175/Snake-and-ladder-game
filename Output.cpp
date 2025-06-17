@@ -57,10 +57,10 @@ Output::Output()
 	UI.SnakeColor = FIREBRICK;
 
 	// Colors of the 4 Players
-	UI.PlayerColors[0] = GOLD;
-	UI.PlayerColors[1] = DARKSLATEBLUE;
-	UI.PlayerColors[2] = KHAKI;
-	UI.PlayerColors[3] = CHOCOLATE;
+	UI.PlayerColors[0] = RED;
+	UI.PlayerColors[1] = BLUE;
+	UI.PlayerColors[2] = GREEN;
+	UI.PlayerColors[3] = PURPLE;
 
 	// Create the output window
 	pWind = CreateWind(UI.width + 15, UI.height, UI.wx, UI.wy); 
