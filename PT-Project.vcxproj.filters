@@ -150,84 +150,84 @@
     <ClCompile Include="CMUgraphicsLib\colors.cpp">
       <Filter>CMUgraphicsLib</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="Player\Player.cpp">
       <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="ApplicationManager.cpp">
+    <ClCompile Include="ApplicationManager\ApplicationManager.cpp">
       <Filter>ApplicationManager</Filter>
     </ClCompile>
-    <ClCompile Include="Action.cpp">
+    <ClCompile Include="Actions\Action.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
+    <ClCompile Include="Grid\GameObjects\GameObject.cpp">
       <Filter>Grid\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Card.cpp">
+    <ClCompile Include="Grid\GameObjects\Cards\Card.cpp">
       <Filter>Grid\GameObjects\Cards</Filter>
     </ClCompile>
-    <ClCompile Include="Ladder.cpp">
+    <ClCompile Include="Grid\GameObjects\Ladder.cpp">
       <Filter>Grid\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="CardOne.cpp">
+    <ClCompile Include="Grid\GameObjects\Cards\CardOne.cpp">
       <Filter>Grid\GameObjects\Cards</Filter>
     </ClCompile>
-    <ClCompile Include="Grid.cpp">
+    <ClCompile Include="Grid\Grid.cpp">
       <Filter>Grid</Filter>
     </ClCompile>
-    <ClCompile Include="Cell.cpp">
+    <ClCompile Include="Grid\Cell.cpp">
       <Filter>Grid</Filter>
     </ClCompile>
-    <ClCompile Include="CellPosition.cpp">
+    <ClCompile Include="GUIClasses\CellPosition.cpp">
       <Filter>GUIClasses</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
+    <ClCompile Include="GUIClasses\Input.cpp">
       <Filter>GUIClasses</Filter>
     </ClCompile>
-    <ClCompile Include="Output.cpp">
+    <ClCompile Include="GUIClasses\Output.cpp">
       <Filter>GUIClasses</Filter>
     </ClCompile>
-    <ClCompile Include="SwitchAction.cpp">
+    <ClCompile Include="Actions\SwitchAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="AddCardAction.cpp">
+    <ClCompile Include="Actions\Add and Remove Actions\AddCardAction.cpp">
       <Filter>Actions\Add and Remove Actions</Filter>
     </ClCompile>
-    <ClCompile Include="AddLadderAction.cpp">
+    <ClCompile Include="Actions\Add and Remove Actions\AddLadderAction.cpp">
       <Filter>Actions\Add and Remove Actions</Filter>
     </ClCompile>
-    <ClCompile Include="AddSnakeAction.cpp">
+    <ClCompile Include="Actions\Add and Remove Actions\AddSnakeAction.cpp">
       <Filter>Actions\Add and Remove Actions</Filter>
     </ClCompile>
-    <ClCompile Include="CopyAction.cpp">
+    <ClCompile Include="Actions\Copy, Cut and Paste\CopyAction.cpp">
       <Filter>Actions\Copy, Cut and Paste</Filter>
     </ClCompile>
-    <ClCompile Include="CutAction.cpp">
+    <ClCompile Include="Actions\Copy, Cut and Paste\CutAction.cpp">
       <Filter>Actions\Copy, Cut and Paste</Filter>
     </ClCompile>
-    <ClCompile Include="PasteAction.cpp">
+    <ClCompile Include="Actions\Copy, Cut and Paste\PasteAction.cpp">
       <Filter>Actions\Copy, Cut and Paste</Filter>
     </ClCompile>
-    <ClCompile Include="DeleteObjectAction.cpp">
+    <ClCompile Include="Actions\Add and Remove Actions\DeleteObjectAction.cpp">
       <Filter>Actions\Add and Remove Actions</Filter>
     </ClCompile>
-    <ClCompile Include="ClearAction.cpp">
+    <ClCompile Include="Actions\Add and Remove Actions\ClearAction.cpp">
       <Filter>Actions\Add and Remove Actions</Filter>
     </ClCompile>
-    <ClCompile Include="SaveAction.cpp">
+    <ClCompile Include="Actions\Save and Load\SaveAction.cpp">
       <Filter>Actions\Save and Load</Filter>
     </ClCompile>
-    <ClCompile Include="LoadAction.cpp">
+    <ClCompile Include="Actions\Save and Load\LoadAction.cpp">
       <Filter>Actions\Save and Load</Filter>
     </ClCompile>
-    <ClCompile Include="NewGameAction.cpp">
+    <ClCompile Include="Actions\Game Mode Actions\NewGameAction.cpp">
       <Filter>Actions\Game Mode Actions</Filter>
     </ClCompile>
-    <ClCompile Include="RollDiceAction.cpp">
+    <ClCompile Include="Actions\Game Mode Actions\RollDiceAction.cpp">
       <Filter>Actions\Game Mode Actions</Filter>
     </ClCompile>
-    <ClCompile Include="CardThreeFour.cpp" />
-    <ClCompile Include="CardFiveSix.cpp" />
+    <ClCompile Include="Grid\GameObjects\Cards\CardThreeFour.cpp" />
+    <ClCompile Include="Grid\GameObjects\Cards\CardFiveSix.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -290,86 +290,86 @@
     <ClInclude Include="CMUgraphicsLib\jpeg\jversion.h">
       <Filter>CMUgraphicsLib\JPEG</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="Player\Player.h">
       <Filter>Player</Filter>
     </ClInclude>
-    <ClInclude Include="ApplicationManager.h">
+    <ClInclude Include="ApplicationManager\ApplicationManager.h">
       <Filter>ApplicationManager</Filter>
     </ClInclude>
-    <ClInclude Include="Action.h">
+    <ClInclude Include="Actions\Action.h">
       <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
+    <ClInclude Include="Grid\GameObjects\GameObject.h">
       <Filter>Grid\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Card.h">
+    <ClInclude Include="Grid\GameObjects\Cards\Card.h">
       <Filter>Grid\GameObjects\Cards</Filter>
     </ClInclude>
-    <ClInclude Include="CardOne.h">
+    <ClInclude Include="Grid\GameObjects\Cards\CardOne.h">
       <Filter>Grid\GameObjects\Cards</Filter>
     </ClInclude>
-    <ClInclude Include="Ladder.h">
+    <ClInclude Include="Grid\GameObjects\Ladder.h">
       <Filter>Grid\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Grid.h">
+    <ClInclude Include="Grid\Grid.h">
       <Filter>Grid</Filter>
     </ClInclude>
-    <ClInclude Include="Cell.h">
+    <ClInclude Include="Grid\Cell.h">
       <Filter>Grid</Filter>
     </ClInclude>
-    <ClInclude Include="CellPosition.h">
+    <ClInclude Include="GUIClasses\CellPosition.h">
       <Filter>GUIClasses</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
+    <ClInclude Include="GUIClasses\Input.h">
       <Filter>GUIClasses</Filter>
     </ClInclude>
-    <ClInclude Include="Output.h">
+    <ClInclude Include="GUIClasses\Output.h">
       <Filter>GUIClasses</Filter>
     </ClInclude>
-    <ClInclude Include="UI_Info.h">
+    <ClInclude Include="GUIClasses\UI_Info.h">
       <Filter>GUIClasses</Filter>
     </ClInclude>
     <ClInclude Include="DEFS.h" />
-    <ClInclude Include="SwitchAction.h">
+    <ClInclude Include="Actions\SwitchAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="AddCardAction.h">
+    <ClInclude Include="Actions\Add and Remove Actions\AddCardAction.h">
       <Filter>Actions\Add and Remove Actions</Filter>
     </ClInclude>
-    <ClInclude Include="AddLadderAction.h">
+    <ClInclude Include="Actions\Add and Remove Actions\AddLadderAction.h">
       <Filter>Actions\Add and Remove Actions</Filter>
     </ClInclude>
-    <ClInclude Include="AddSnakeAction.h">
+    <ClInclude Include="Actions\Add and Remove Actions\AddSnakeAction.h">
       <Filter>Actions\Add and Remove Actions</Filter>
     </ClInclude>
-    <ClInclude Include="CopyAction.h">
+    <ClInclude Include="Actions\Copy, Cut and Paste\CopyAction.h">
       <Filter>Actions\Copy, Cut and Paste</Filter>
     </ClInclude>
-    <ClInclude Include="CutAction.h">
+    <ClInclude Include="Actions\Copy, Cut and Paste\CutAction.h">
       <Filter>Actions\Copy, Cut and Paste</Filter>
     </ClInclude>
-    <ClInclude Include="PasteAction.h">
+    <ClInclude Include="Actions\Copy, Cut and Paste\PasteAction.h">
       <Filter>Actions\Copy, Cut and Paste</Filter>
     </ClInclude>
-    <ClInclude Include="DeleteObjectAction.h">
+    <ClInclude Include="Actions\Add and Remove Actions\DeleteObjectAction.h">
       <Filter>Actions\Add and Remove Actions</Filter>
     </ClInclude>
-    <ClInclude Include="ClearAction.h">
+    <ClInclude Include="Actions\Add and Remove Actions\ClearAction.h">
       <Filter>Actions\Add and Remove Actions</Filter>
     </ClInclude>
-    <ClInclude Include="SaveAction.h">
+    <ClInclude Include="Actions\Save and Load\SaveAction.h">
       <Filter>Actions\Save and Load</Filter>
     </ClInclude>
-    <ClInclude Include="LoadAction.h">
+    <ClInclude Include="Actions\Save and Load\LoadAction.h">
       <Filter>Actions\Save and Load</Filter>
     </ClInclude>
-    <ClInclude Include="NewGameAction.h">
+    <ClInclude Include="Actions\Game Mode Actions\NewGameAction.h">
       <Filter>Actions\Game Mode Actions</Filter>
     </ClInclude>
-    <ClInclude Include="RollDiceAction.h">
+    <ClInclude Include="Actions\Game Mode Actions\RollDiceAction.h">
       <Filter>Actions\Game Mode Actions</Filter>
     </ClInclude>
-    <ClInclude Include="CardThreeFour.h" />
-    <ClInclude Include="CardFiveSix.h" />
+    <ClInclude Include="Grid\GameObjects\Cards\CardThreeFour.h" />
+    <ClInclude Include="Grid\GameObjects\Cards\CardFiveSix.h" />
   </ItemGroup>
 </Project>
