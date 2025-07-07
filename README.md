@@ -1,5 +1,5 @@
 # **Snake and Ladder Game**
-## a simple game application that is a mixture between the Snakes & Ladders and Monopoly games. 
+ a simple game application that is a mixture between the Snakes & Ladders and Monopoly games. 
 
 ## There are two modes in the game: 
 ### Design mode is where the user is able to build the playing grid 
